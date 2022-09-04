@@ -51,6 +51,15 @@
   when: random_chain
 
 # TODO: inject proxy into settings
+# - name: Add mappings to /etc/proxychains.conf
+#   ansible.builtin.blockinfile:
+#     path: /etc/proxychains.conf
+#     block: |
+#       {{ item.name }} {{ item.ip }} {{ item.port }}
+#     marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.ip }}"
+#   loop:
+#     - "{{ default_proxies }}"
+
 - name: Add mappings to /etc/proxychains.conf
   ansible.builtin.blockinfile:
     path: /etc/proxychains.conf
