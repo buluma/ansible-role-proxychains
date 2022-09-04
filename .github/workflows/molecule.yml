@@ -54,8 +54,6 @@ jobs:
           - image: "debian-systemd"
             tag: "bookworm"
           - image: "enterpriselinux"
-            tag: "7"
-          - image: "enterpriselinux"
             tag: "8"
           - image: "enterpriselinux"
             tag: "latest"
