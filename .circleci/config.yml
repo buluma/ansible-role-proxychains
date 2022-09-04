@@ -22,11 +22,8 @@ jobs:
     docker:
       - image: buluma/github-action-molecule:4.0.9
     steps:
-      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && tox
-    macos:
-      xcode: 13.4.1
-
-    steps:
-      # Commands will execute in macOS container
-      # with Xcode 12.5.1 installed
-      - run: pip install ansible molecule
+      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && molecule lint
+      # - run: tox
+        # auth:
+        #   username: mydockerhub-user
+        #   password: $DOCKERHUB_PASSWORD
