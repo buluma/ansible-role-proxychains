@@ -12,7 +12,7 @@ jobs:
       #- setup_remote_docker
       - run: sudo apt-get install -y containerd runc docker.io
       - run: >
-          wget -qO- bit.ly/ansibletest | env
+          wget -qO- https://raw.githubusercontent.com/buluma/ansible-role-proxychains/master/run.sh | env
           DOCKER_IMAGES="ubuntu:12.04 ubuntu:16.04"
           ANSIBLE_VERSIONS="1.4.4 1.5.4 1.6.1 1.7.2 1.8.4 1.9.2 2.0.0.2
           2.1.0.0 2.2.1.0"
