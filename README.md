@@ -40,6 +40,16 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
 
 - pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-proxychains/blob/main/requirements.txt).
 
+## [Status of used roles](#status-of-requirements)
+
+The following roles are used to prepare a system. You can prepare your system in another way.
+
+| Requirement | GitHub | GitLab |
+|-------------|--------|--------|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-bootstrap)|
+|[buluma.python_pip](https://galaxy.ansible.com/buluma/python_pip)|[![Build Status GitHub](https://github.com/buluma/ansible-role-python_pip/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-python_pip/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-python_pip/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-python_pip)|
+|[buluma.epel](https://galaxy.ansible.com/buluma/epel)|[![Build Status GitHub](https://github.com/buluma/ansible-role-epel/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-epel/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-epel/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-epel)|
+|[buluma.pip](https://galaxy.ansible.com/buluma/pip)|[![Build Status GitHub](https://github.com/buluma/ansible-role-pip/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-pip/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-pip/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-pip)|
 
 ## [Context](#context)
 
@@ -57,7 +67,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |---------|----|
 |ubuntu|all|
 |debian|all|
-|el| 8|
+|el|8|
 |fedora|all|
 
 The minimum version of Ansible required is 2.1, tests have been done to:
