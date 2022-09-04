@@ -1,0 +1,26 @@
+---
+dynamic_chain: false
+strict_chain: false
+round_robin_chain: false
+random_chain: false
+
+proxies_list:
+  - name: socks4
+    ip: 133.18.194.45
+    port: 8080
+
+users:
+  - name: socks4
+  - ip: 133.18.194.45
+  - port: 8080
+
+
+proxy:
+  proxy1:
+    - name: socks4
+    - ip: 133.18.194.45
+    - port: 8080
+  proxy2:
+    - name: socks4
+    - ip: 133.18.194.44
+    - port: 8080

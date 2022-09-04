@@ -13,3 +13,51 @@
     name: '{{ proxychains_packages }}'
     state: present
     update_cache: "yes"
+
+- name: copy proxychains config into place.
+  ansible.builtin.template:
+    src: proxychains.conf.j2
+    dest: /etc/proxychains.conf
+    mode: 0644
+  # notify: restart proxychains
+
+# TODO: build variable injection into template for dynamic/static
+- name: identifies how the ProxyList is treated | dynamic_chain
+  ansible.builtin.lineinfile:
+    path: /etc/proxychains.conf
+    regexp: '^#dynamic_chain'
+    line: dynamic_chain
+  when: dynamic_chain
+
+- name: identifies how the ProxyList is treated | strict_chain
+  ansible.builtin.lineinfile:
+    path: /etc/proxychains.conf
+    regexp: '^#strict_chain'
+    line: strict_chain
+  when: strict_chain
+
+- name: identifies how the ProxyList is treated | round_robin_chain
+  ansible.builtin.lineinfile:
+    path: /etc/proxychains.conf
+    regexp: '^#round_robin_chain'
+    line: round_robin_chain
+  when: round_robin_chain
+
+- name: identifies how the ProxyList is treated | random_chain
+  ansible.builtin.lineinfile:
+    path: /etc/proxychains.conf
+    regexp: '^#random_chain'
+    line: random_chain
+  when: random_chain
+
+# TODO: inject proxy into settings
+- name: Add mappings to /etc/proxychains.conf
+  ansible.builtin.blockinfile:
+    path: /etc/proxychains.conf
+    block: |
+      {{ item.name }} {{ item.ip }} {{ item.port }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.ip }}"
+  loop:
+    - { name: socks4, ip: 133.18.194.45, port: 8080 }
+    - { name: socks4, ip: 185.61.152.137, port: 8080 }
+    - { name: socks4, ip: 165.154.236.59, port: 80 }
