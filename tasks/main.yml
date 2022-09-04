@@ -19,7 +19,6 @@
     state: present
     update_cache: "yes"
 
-# TODO: build variable injection into template for dynamic/static
 - name: dynamic_chain setup
   block:
     - name: Copy Proxychains config into place | dynamic_chain.

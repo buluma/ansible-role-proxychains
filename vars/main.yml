@@ -8,6 +8,7 @@ _proxychains_packages:
     - proxychains-ng
   RedHat-8:
     - proxychains-ng
+
 proxychains_packages: "{{ _proxychains_packages[ansible_os_family ~ '-' ~ ansible_distribution_major_version] | default(_proxychains_packages[ansible_os_family] | default(_proxychains_packages['default'] )) }}"
 
 workaround_ansible_issue_7843: yes
@@ -15,3 +16,4 @@ workaround_ansible_issue_7843: yes
 proxychains_dependencies:
   - nmap
   - tor
+  - telnet
