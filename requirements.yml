@@ -6,4 +6,3 @@ roles:
   - name: buluma.pip
 collections:
   - name: community.general
-  - name: ansible.posix
