@@ -55,8 +55,6 @@ jobs:
             tag: "bookworm"
           - image: "enterpriselinux"
             tag: "8"
-          - image: "enterpriselinux"
-            tag: "latest"
           - image: "fedora-systemd"
             tag: "35"
           - image: "fedora-systemd"
