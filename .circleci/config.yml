@@ -23,6 +23,7 @@ jobs:
       - image: buluma/github-action-molecule:4.0.9
     resource_class: xlarge
     steps:
+      - run: checkout
       - run: tox
         # auth:
         #   username: mydockerhub-user
