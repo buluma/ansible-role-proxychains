@@ -10,7 +10,7 @@ jobs:
       - run: sudo apt-get install -y python3-dev libffi-dev libssl-dev
       # Not needed for machine executor
       #- setup_remote_docker
-      - run: sudo apt-get install -y docker.io
+      - run: sudo apt-get install -y containerd runc docker.io
       - run: >
           wget -qO- bit.ly/ansibletest | env
           DOCKER_IMAGES="ubuntu:12.04 ubuntu:16.04"
