@@ -1,54 +1,86 @@
 ---
-# - include: compat.yml
+- name: Import assert.yml
+  ansible.builtin.import_tasks: assert.yml
+  run_once: yes
+  delegate_to: localhost
 
-# - include: include_vars.yml
 - name: Installing dependencies.
   ansible.builtin.package:
     name: nmap
     state: present
     update_cache: "yes"
 
-- name: Installing proxychains.
+- name: Installing Proxychains.
   ansible.builtin.package:
     name: '{{ proxychains_packages }}'
     state: present
     update_cache: "yes"
 
-- name: copy proxychains config into place.
-  ansible.builtin.template:
-    src: proxychains.conf.j2
-    dest: /etc/proxychains.conf
-    mode: 0644
+# - name: copy proxychains config into place.
+#   ansible.builtin.template:
+#     src: proxychains.conf.j2
+#     dest: /etc/proxychains.conf
+#     mode: 0644
   # notify: restart proxychains
 
 # TODO: build variable injection into template for dynamic/static
-- name: identifies how the ProxyList is treated | dynamic_chain
-  ansible.builtin.lineinfile:
-    path: /etc/proxychains.conf
-    regexp: '^#dynamic_chain'
-    line: dynamic_chain
+- name: dynamic_chain setup
+  block:
+    - name: Copy Proxychains config into place | dynamic_chain.
+      ansible.builtin.template:
+        src: proxychains-dynamic_chain.conf.j2
+        dest: /etc/proxychains.conf
+        mode: 0644
   when: dynamic_chain
 
-- name: identifies how the ProxyList is treated | strict_chain
-  ansible.builtin.lineinfile:
-    path: /etc/proxychains.conf
-    regexp: '^#strict_chain'
-    line: strict_chain
+- name: strict_chain setup
+  block:
+    - name: Copy Proxychains config into place | strict_chain.
+      ansible.builtin.template:
+        src: proxychains-strict_chain.conf.j2
+        dest: /etc/proxychains.conf
+        mode: 0644
   when: strict_chain
 
-- name: identifies how the ProxyList is treated | round_robin_chain
-  ansible.builtin.lineinfile:
-    path: /etc/proxychains.conf
-    regexp: '^#round_robin_chain'
-    line: round_robin_chain
+- name: round_robin_chain setup
+  block:
+    - name: Copy Proxychains config into place | round_robin_chain.
+      ansible.builtin.template:
+        src: proxychains-round_robin_chain.conf.j2
+        dest: /etc/proxychains.conf
+        mode: 0644
+    - name: Set chain_len only if round_robin_chain
+      ansible.builtin.lineinfile:
+        path: /etc/proxychains.conf
+        regexp: '^#chain_len'
+        line: chain_len = {{ chain_len }}
   when: round_robin_chain
 
-- name: identifies how the ProxyList is treated | random_chain
+- name: random_chain setup
+  block:
+    - name: Copy Proxychains config into place | random_chain.
+      ansible.builtin.template:
+        src: proxychains-random_chain.conf.j2
+        dest: /etc/proxychains.conf
+        mode: 0644
+    - name: Set chain_len only if random_chain
+      ansible.builtin.lineinfile:
+        path: /etc/proxychains.conf
+        regexp: '^#chain_len'
+        line: chain_len = {{ chain_len }}
+  when: random_chain
+
+- name: Set tcp_read_time_out
   ansible.builtin.lineinfile:
     path: /etc/proxychains.conf
-    regexp: '^#random_chain'
-    line: random_chain
-  when: random_chain
+    regexp: '^tcp_read_time_out 15000'
+    line: tcp_read_time_out {{ tcp_read_time_out }}
+
+- name: Set tcp_connect_time_out
+  ansible.builtin.lineinfile:
+    path: /etc/proxychains.conf
+    regexp: '^tcp_connect_time_out 8000'
+    line: tcp_connect_time_out {{ tcp_connect_time_out }}
 
 # TODO: inject proxy into settings
 # - name: Add mappings to /etc/proxychains.conf
@@ -60,7 +92,7 @@
 #   loop:
 #     - "{{ default_proxies }}"
 
-- name: Add mappings to /etc/proxychains.conf
+- name: Add proxy list mappings to /etc/proxychains.conf
   ansible.builtin.blockinfile:
     path: /etc/proxychains.conf
     block: |

@@ -13,6 +13,11 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 ---
 - name: Converge
   hosts: all
+  vars:
+    dynamic_chain: true
+    chain_len: 2
+    tcp_read_time_out: 16000
+    tcp_connect_time_out: 10000
   tasks:
     - name: "Include buluma.proxychains"
       ansible.builtin.include_role:
@@ -35,6 +40,54 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
 ```
 
 
+## [Role Variables](#role-variables)
+
+The default values for the variables are set in `defaults/main.yml`:
+```yaml
+---
+# The option below identifies how the ProxyList is treated.
+# only one option should be uncommented at time,
+# otherwise the last appearing option will be accepted
+#
+
+# Dynamic - Each connection will be done via chained proxies
+# all proxies chained in the order as they appear in the list
+# at least one proxy must be online to play in chain
+# (dead proxies are skipped)
+dynamic_chain: false
+
+# Strict - Each connection will be done via chained proxies
+# all proxies chained in the order as they appear in the list
+# all proxies must be online to play in chain
+strict_chain: false
+
+# Round Robin - Each connection will be done via chained proxies
+# of chain_len length
+# all proxies chained in the order as they appear in the list
+# at least one proxy must be online to play in chain
+# (dead proxies are skipped).
+# the start of the current proxy chain is the proxy after the last
+# proxy in the previously invoked proxy chain.
+# if the end of the proxy chain is reached while looking for proxies
+# start at the beginning again.
+# These semantics are not guaranteed in a multithreaded environment.
+round_robin_chain: false
+
+# Random - Each connection will be done via random proxy
+# (or proxy chain, see  chain_len) from the list.
+# this option is good to test your IDS :)
+random_chain: false
+
+# Make sense only if random_chain or round_robin_chain
+#chain_len = 2
+
+# Quiet mode (no output from library)
+#quiet_mode
+
+# Set timeouts in milliseconds
+tcp_read_time_out: 15000
+tcp_connect_time_out: 8000
+```
 
 ## [Requirements](#requirements)
 

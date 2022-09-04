@@ -1,6 +1,11 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    dynamic_chain: true
+    chain_len: 2
+    tcp_read_time_out: 16000
+    tcp_connect_time_out: 10000
   tasks:
     - name: "Include buluma.proxychains"
       ansible.builtin.include_role:
