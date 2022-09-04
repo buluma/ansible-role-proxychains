@@ -21,6 +21,9 @@ jobs:
   build:
     docker:
       - image: buluma/github-action-molecule:4.0.9
+    resource_class: xlarge
+    steps:
+      - run: tox
         # auth:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD
