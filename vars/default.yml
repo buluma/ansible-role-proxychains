@@ -1,3 +1,0 @@
----
-workaround_ansible_issue_7843: yes
-package_name: proxychains

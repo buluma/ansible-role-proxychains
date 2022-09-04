@@ -1,29 +1,14 @@
 ---
 # - include: compat.yml
 
-- include: include_vars.yml
-
-# - debug: var=ansible_os_family
-# - debug: var=ansible_distribution_major_version
-
-# - fail:
-
-# - fail:
-# - name: install proxychains with default package manager
-#   package: "{{backcompat_pkg_mgr}} name={{package_name}}"
-#   sudo: yes
-#   when: backcompat_pkg_mgr == "yum" or backcompat_pkg_mgr == "apt"
+# - include: include_vars.yml
 - name: Installing dependencies.
   ansible.builtin.package:
     name: nmap
     state: present
     update_cache: "yes"
 
-- debug: var=proxychains_packages
-
-# - fail:
-
-- name: install proxychains with default package manager
+- name: Installing proxychains.
   ansible.builtin.package:
     name: '{{ proxychains_packages }}'
     state: present
