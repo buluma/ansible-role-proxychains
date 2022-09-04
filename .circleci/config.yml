@@ -21,10 +21,9 @@ jobs:
   build:
     docker:
       - image: buluma/github-action-molecule:4.0.9
-    resource_class: xlarge
     steps:
-      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la .
-      - run: tox
+      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && tox
+      # - run: tox
         # auth:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD
