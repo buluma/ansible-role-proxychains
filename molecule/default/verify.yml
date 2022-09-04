@@ -10,11 +10,15 @@
       cat /etc/proxychains.conf
     register: proxychains_conf
 
-  - debug: var=proxychains_conf
+  - debug: var=proxychains_conf.stdout_lines
+    tags:
+      molecule-notest
 
   - name: Finding some webservers through proxy.
     command: |
       proxychains nmap 127.0.0.1
     register: nmap_test
 
-  - debug: var=nmap_test
+  - debug: var=nmap_test.stdout_lines
+    tags:
+      molecule-notest

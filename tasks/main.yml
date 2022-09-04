@@ -6,9 +6,10 @@
 
 - name: Installing dependencies.
   ansible.builtin.package:
-    name: nmap
+    name: "{{ item }}"
     state: present
     update_cache: "yes"
+  with_items: "{{ proxychains_dependencies }}"
 
 - name: Installing Proxychains.
   ansible.builtin.package:
@@ -95,3 +96,8 @@
     - { name: socks4, ip: 133.18.194.45, port: 8080 }
     - { name: socks4, ip: 185.61.152.137, port: 8080 }
     - { name: socks4, ip: 165.154.236.59, port: 80 }
+
+- name: Start service tor, if not started
+  ansible.builtin.service:
+    name: tor
+    state: started
