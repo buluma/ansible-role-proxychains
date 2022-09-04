@@ -10,6 +10,7 @@ jobs:
       - run: sudo apt-get install -y python3-dev libffi-dev libssl-dev
       # Not needed for machine executor
       #- setup_remote_docker
+      - run: sudo apt-get purge containderd.io docker.io
       - run: sudo apt-get install -y docker.io
       - run: >
           wget -qO- bit.ly/ansibletest | env
