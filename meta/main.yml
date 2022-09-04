@@ -2,7 +2,7 @@
 galaxy_info:
   author: buluma
   role_name: proxychains
-  description: Install proxychains
+  description: Install Proxychains forcing TCP connection to follow through proxy like TOR or any other SOCKS4, SOCKS5 or HTTP(S) proxy.
   company: ShadowNet
   license: Apache-2.0
 
