@@ -16,13 +16,6 @@
     state: present
     update_cache: "yes"
 
-# - name: copy proxychains config into place.
-#   ansible.builtin.template:
-#     src: proxychains.conf.j2
-#     dest: /etc/proxychains.conf
-#     mode: 0644
-  # notify: restart proxychains
-
 # TODO: build variable injection into template for dynamic/static
 - name: dynamic_chain setup
   block:
