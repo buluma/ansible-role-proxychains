@@ -1,0 +1,10 @@
+---
+#
+# Ansible managed
+#
+argument_specs:
+  main:
+    short_description: Install proxychains
+    description: >
+      Install proxychains
+    author: Michael Buluma

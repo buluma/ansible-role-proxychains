@@ -1,0 +1,20 @@
+---
+#
+# Ansible managed
+#
+exclude_paths:
+  - ./molecule/default/prepare.yml
+  - ./molecule/default/converge.yml
+  - ./molecule/default/verify.yml
+  - ./molecule/default/collections.yml
+  - ./.tox
+  - ./.cache
+  - ./.github
+  - ./.circleci
+  - ./requirements.yml
+
+skip_list:  # or 'skip_list' to silence them completely
+  - fqcn-builtins  # Use FQCN for builtin actions.
+  - parser-error  # AnsibleParserError.
+  - unnamed-task  # All tasks should be named.
+  - var-spacing  # Variables should have spaces before and after: {{ var_name }}.

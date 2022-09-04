@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include buluma.proxychains"
+      ansible.builtin.include_role:
+        name: "buluma.proxychains"
