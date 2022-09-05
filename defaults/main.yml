@@ -33,10 +33,10 @@ round_robin_chain: false
 random_chain: false
 
 # Make sense only if random_chain or round_robin_chain
-#chain_len = 2
+# chain_len = 2
 
 # Quiet mode (no output from library)
-#quiet_mode
+# quiet_mode
 
 # Set timeouts in milliseconds
 tcp_read_time_out: 15000
