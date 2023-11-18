@@ -1,4 +1,4 @@
-# [proxychains](#proxychains)
+# [Ansible role proxychains](#proxychains)
 
 Install Proxychains forcing TCP connection to follow through proxy like TOR or any other SOCKS4, SOCKS5 or HTTP(S) proxy.
 
