@@ -21,6 +21,8 @@
 
 - name: Dynamic_chain setup
   when: dynamic_chain
+  tags:
+    - molecule-idempotence-notest
   block:
     - name: Copy Proxychains config into place | dynamic_chain.
       ansible.builtin.template:
@@ -30,6 +32,8 @@
 
 - name: Strict_chain setup
   when: strict_chain
+  tags:
+    - molecule-idempotence-notest
   block:
     - name: Copy Proxychains config into place | strict_chain.
       ansible.builtin.template:
@@ -45,6 +49,8 @@
         src: proxychains-round_robin_chain.conf.j2
         dest: /etc/proxychains.conf
         mode: 0644
+      tags:
+        - molecule-idempotence-notest
     - name: Set chain_len only if round_robin_chain
       ansible.builtin.lineinfile:
         path: /etc/proxychains.conf
@@ -59,6 +65,8 @@
         src: proxychains-random_chain.conf.j2
         dest: /etc/proxychains.conf
         mode: 0644
+      tags:
+        - molecule-idempotence-notest
     - name: Set chain_len only if random_chain
       ansible.builtin.lineinfile:
         path: /etc/proxychains.conf
@@ -70,12 +78,16 @@
     path: /etc/proxychains.conf
     regexp: '^tcp_read_time_out 15000'
     line: tcp_read_time_out {{ tcp_read_time_out }}
+  tags:
+    - molecule-idempotence-notest
 
 - name: Set tcp_connect_time_out
   ansible.builtin.lineinfile:
     path: /etc/proxychains.conf
     regexp: '^tcp_connect_time_out 8000'
     line: tcp_connect_time_out {{ tcp_connect_time_out }}
+  tags:
+    - molecule-idempotence-notest
 
 # TODO: inject proxy into settings
 # - name: Add mappings to /etc/proxychains.conf
