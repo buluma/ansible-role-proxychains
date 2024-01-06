@@ -8,6 +8,10 @@
 
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#7](https://github.com/buluma/ansible-role-proxychains/issues/7)
 
+**Merged pull requests:**
+
+- fix ansible issues. [\#8](https://github.com/buluma/ansible-role-proxychains/pull/8) ([buluma](https://github.com/buluma))
+
 ## [0.1.2](https://github.com/buluma/ansible-role-proxychains/tree/0.1.2) (2022-09-04)
 
 [Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/0.1.1...0.1.2)
