@@ -51,7 +51,7 @@
         regexp: '^#chain_len'
         line: chain_len = {{ chain_len }}
 
-- name: random_chain setup
+- name: Random_chain setup
   when: random_chain
   block:
     - name: Copy Proxychains config into place | random_chain.
