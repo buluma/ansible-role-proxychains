@@ -21,25 +21,25 @@
 
 - name: Dynamic_chain setup
   when: dynamic_chain
+  tags:
+    - molecule-idempotence-notest
   block:
     - name: Copy Proxychains config into place | dynamic_chain.
       ansible.builtin.template:
         src: proxychains-dynamic_chain.conf.j2
         dest: /etc/proxychains.conf
         mode: 0644
-  tags:
-    - molecule-idempotence-notest
 
 - name: Strict_chain setup
   when: strict_chain
+  tags:
+    - molecule-idempotence-notest
   block:
     - name: Copy Proxychains config into place | strict_chain.
       ansible.builtin.template:
         src: proxychains-strict_chain.conf.j2
         dest: /etc/proxychains.conf
         mode: 0644
-  tags:
-    - molecule-idempotence-notest
 
 - name: Round_robin_chain setup
   when: round_robin_chain
