@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-proxychains/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/0.2.0...HEAD)
+
+**Merged pull requests:**
+
+- Testing [\#12](https://github.com/buluma/ansible-role-proxychains/pull/12) ([buluma](https://github.com/buluma))
+
 ## [0.2.0](https://github.com/buluma/ansible-role-proxychains/tree/0.2.0) (2024-01-06)
 
 [Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/0.1.2...0.2.0)
