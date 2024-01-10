@@ -22,7 +22,7 @@ jobs:
     docker:
       - image: buluma/github-action-molecule:v6.0.0
     steps:
-      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && molecule lint && && molecule test
+      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && molecule lint && molecule test
       # - run: tox
         # auth:
         #   username: mydockerhub-user
