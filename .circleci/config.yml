@@ -22,8 +22,7 @@ jobs:
     docker:
       - image: buluma/github-action-molecule:v6.0.0
     steps:
-      # - run: sudo systemctl restart docker
-      - run: ps -p 1 -o comm=systemd
+      - run: sudo apt-get install -y containerd runc docker.io
       - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && molecule test
       # - run: tox
         # auth:
