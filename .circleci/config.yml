@@ -4,6 +4,7 @@ setup: true
 orbs:
   orb-tools: circleci/orb-tools@11.1
   shellcheck: circleci/shellcheck@3.1
+  molecule: mtpettyp/molecule@2.0.0
 
 filters: &filters
   tags:
@@ -12,6 +13,8 @@ filters: &filters
 workflows:
   lint-pack:
     jobs:
+      - molecule/test:
+          role_name: buluma.proxychains
       - orb-tools/lint:
           filters: *filters
       - orb-tools/pack:
