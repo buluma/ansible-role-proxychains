@@ -7,6 +7,7 @@
 **Merged pull requests:**
 
 - Testing [\#12](https://github.com/buluma/ansible-role-proxychains/pull/12) ([buluma](https://github.com/buluma))
+- Bump actions/checkout from 3 to 4 [\#10](https://github.com/buluma/ansible-role-proxychains/pull/10) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [0.2.0](https://github.com/buluma/ansible-role-proxychains/tree/0.2.0) (2024-01-06)
 
