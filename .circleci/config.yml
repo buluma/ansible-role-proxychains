@@ -1,91 +1,23 @@
-# This code is licensed from CircleCI to the user under the MIT license.
-# See here for details: https://circleci.com/developer/orbs/licensing
+---
 version: 2.1
-description: |
-    This Orb runs Ansible lint against the checked out code, the Docker image of the Executor is 'ghcr.io/docker-images-mamono210/circleci-executors/ansible-lint:latest'.
-display:
-    source_url: https://github.com/circleci-orbs-mamono210/ansible-lint
-commands:
-    execute:
-        description: |
-            Execute Ansible lint
-        parameters:
-            molecule-playbook-test:
-                default: false
-                description: null
-                type: boolean
-            molecule-role-test:
-                default: false
-                description: null
-                type: boolean
-        steps:
-            - run:
-                command: |
-                    ansible-lint --version
-                name: Show Ansible lint version
-            - run:
-                command: |
-                    ansible --version
-                    ansible-community --version
-                name: Show Ansible version
-            - run:
-                command: |
-                    #!/bin/bash
-                    if [ "$PARAM_MOLECULE_ROLE_TEST" = 1 ]; then
-                        ansible-galaxy install "git+${CIRCLE_REPOSITORY_URL},${CIRCLE_SHA1}"
-                    fi
+setup: true
+orbs:
+  orb-tools: circleci/orb-tools@11.1
+  shellcheck: circleci/shellcheck@3.1
 
-                    if [ "$PARAM_MOLECULE_PLAYBOOK_TEST" = 1 ]; then
-                        ansible-galaxy install -r roles/requirements.yml
-                    fi
+filters: &filters
+  tags:
+    only: /.*/
 
-                    while IFS= read -r -d '' directory
-                    do
-                        if [[ $directory =~ molecule/.*/requirements.yml ]]; then
-                            ansible-galaxy install -r "$directory"
-                        fi
-                    done <  <(find molecule/* -maxdepth 1 -print0)
-                environment:
-                    PARAM_MOLECULE_PLAYBOOK_TEST: << parameters.molecule-playbook-test >>
-                    PARAM_MOLECULE_ROLE_TEST: << parameters.molecule-role-test >>
-                name: Install the role and dependent roles for Molecule tests
-            - run:
-                command: ansible-lint
-                name: Execute Ansible lint
-executors:
-    default:
-        description: CircleCI executor Ansible lint
-        docker:
-            - image: <<parameters.image>>
-        parameters:
-            image:
-                default: ghcr.io/docker-images-mamono210/circleci-executors/ansible-lint:latest
-                type: string
-            resource_class:
-                default: small
-                enum:
-                    - small
-                    - medium
-                    - medium+
-                    - large
-                type: enum
-        resource_class: <<parameters.resource_class>>
-examples:
-    example:
-        description: Execute Ansible lint
-        usage:
-            version: "2.1"
-            orbs:
-                ansible-lint: orbss/ansible-lint@x.y.z
-            jobs:
-                execute-ansible-lint:
-                    executor: ansible-lint/defaut
-                    steps:
-                        - checkout
-                        - ansible-lint/execute:
-                            molecule-role-test: true
-            workflows:
-                use-my-orb:
-                    jobs:
-                        - execute-ansible-lint
-
+workflows:
+  lint-pack:
+    jobs:
+      - orb-tools/lint:
+          filters: *filters
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/review:
+          filters: *filters
+      - shellcheck/check:
+          exclude: SC2196
+          filters: *filters
