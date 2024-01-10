@@ -1,29 +1,30 @@
 version: 2
 jobs:
-  build:
-    machine: true
-    steps:
-      - checkout
-      - run: sudo apt-get update -qq
-      - run: sudo apt-get install -y wget make ruby-bundler python3-venv
-      # Needed to upgrade requests[security] on Ubuntu 14.04
-      - run: sudo apt-get install -y python3-dev libffi-dev libssl-dev
-      # Not needed for machine executor
-      #- setup_remote_docker
-      - run: sudo apt-get install -y containerd runc docker.io
-      # wget -qO- https://raw.githubusercontent.com/buluma/ansible-role-proxychains/master/run.sh | env
-      - run: >
-          wget -qO- bit.ly/ansibletest | env
-          DOCKER_IMAGES="ubuntu:12.04 ubuntu:16.04"
-          ANSIBLE_VERSIONS="1.4.4 1.5.4 1.6.1 1.7.2 1.8.4 1.9.2 2.0.0.2
-          2.1.0.0 2.2.1.0"
-          sh
   # build:
-  #   docker:
-  #     - image: buluma/github-action-molecule:v6.0.0
+  #   machine: true
   #   steps:
-  #     - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && molecule test
-  #     # - run: tox
-  #       # auth:
-  #       #   username: mydockerhub-user
-  #       #   password: $DOCKERHUB_PASSWORD
+  #     - checkout
+  #     - run: sudo apt-get update -qq
+  #     - run: sudo apt-get install -y wget make ruby-bundler python3-venv
+  #     # Needed to upgrade requests[security] on Ubuntu 14.04
+  #     - run: sudo apt-get install -y python3-dev libffi-dev libssl-dev
+  #     # Not needed for machine executor
+  #     #- setup_remote_docker
+  #     - run: sudo apt-get install -y containerd runc docker.io
+  #     # wget -qO- https://raw.githubusercontent.com/buluma/ansible-role-proxychains/master/run.sh | env
+  #     - run: >
+  #         wget -qO- bit.ly/ansibletest | env
+  #         DOCKER_IMAGES="ubuntu:12.04 ubuntu:16.04"
+  #         ANSIBLE_VERSIONS="1.4.4 1.5.4 1.6.1 1.7.2 1.8.4 1.9.2 2.0.0.2
+  #         2.1.0.0 2.2.1.0"
+  #         sh
+  build:
+    docker:
+      - image: buluma/github-action-molecule:v6.0.0
+    steps:
+      - run: sudo systemctl restart docker
+      - run: git clone https://github.com/buluma/ansible-role-proxychains.git && cd ansible-role-proxychains && ls -la . && molecule test
+      # - run: tox
+        # auth:
+        #   username: mydockerhub-user
+        #   password: $DOCKERHUB_PASSWORD
