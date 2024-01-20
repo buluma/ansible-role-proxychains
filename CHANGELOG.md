@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-proxychains/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/0.3.0...HEAD)
+
+**Merged pull requests:**
+
+- Bump buluma/molecule-action from 6.0.0 to 6.0.1 [\#13](https://github.com/buluma/ansible-role-proxychains/pull/13) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.3.0](https://github.com/buluma/ansible-role-proxychains/tree/0.3.0) (2024-01-10)
 
 [Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/0.2.0...0.3.0)
