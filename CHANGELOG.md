@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- Bump buluma/dependabot-auto-merge-action from 2.1.1 to 2.1.2 [\#15](https://github.com/buluma/ansible-role-proxychains/pull/15) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump release-drafter/release-drafter from 5 to 6 [\#14](https://github.com/buluma/ansible-role-proxychains/pull/14) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [0.4.0](https://github.com/buluma/ansible-role-proxychains/tree/0.4.0) (2024-01-20)
