@@ -1,14 +1,14 @@
 ---
 - name: Import assert.yml
   ansible.builtin.import_tasks: assert.yml
-  run_once: yes
+  run_once: true
   delegate_to: localhost
 
 - name: Installing dependencies.
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
-    update_cache: "yes"
+    update_cache: "true"
   with_items: "{{ proxychains_dependencies }}"
   notify:
     - Restart tor
@@ -17,7 +17,7 @@
   ansible.builtin.package:
     name: '{{ proxychains_packages }}'
     state: present
-    update_cache: "yes"
+    update_cache: "true"
 
 - name: Dynamic_chain setup
   when: dynamic_chain
