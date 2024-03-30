@@ -31,8 +31,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: buluma.bootstrap
@@ -85,7 +85,7 @@ random_chain: false
 # Make sense only if random_chain or round_robin_chain
 # chain_len = 2
 
-# Quiet mode (no output from library)
+# Quiet mode (false output from library)
 # quiet_mode
 
 # Set timeouts in milliseconds

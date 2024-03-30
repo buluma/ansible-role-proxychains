@@ -1,11 +1,19 @@
 ---
 - name: Converge
   hosts: all
+  become: true
+  gather_facts: true
   vars:
     dynamic_chain: true
     chain_len: 2
     tcp_read_time_out: 16000
     tcp_connect_time_out: 10000
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
   tasks:
     - name: "Include buluma.proxychains"
       ansible.builtin.include_role:
