@@ -6,6 +6,3 @@
 
   roles:
     - role: buluma.bootstrap
-    - role: buluma.python_pip
-    - role: buluma.epel
-    - role: buluma.pip

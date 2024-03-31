@@ -15,6 +15,15 @@
       when: ansible_os_family == 'Debian'
       changed_when: false
   tasks:
+    - name: "Include buluma.python_pip"
+      ansible.builtin.include_role:
+        name: "buluma.python_pip"
+    - name: "Include buluma.epel"
+      ansible.builtin.include_role:
+        name: "buluma.epel"
+    - name: "Include buluma.pip"
+      ansible.builtin.include_role:
+        name: "buluma.pip"
     - name: "Include buluma.proxychains"
       ansible.builtin.include_role:
         name: "buluma.proxychains"
