@@ -5,4 +5,4 @@
 repository:
   description: Install Proxychains forcing TCP connection to follow through proxy like TOR or any other SOCKS4, SOCKS5 or HTTP(S) proxy.
   homepage: https://buluma.github.io/
-  topics: networking, proxy, ansible, molecule, tox, playbook
+  topics: networking, proxy, ansible, molecule, playbook
