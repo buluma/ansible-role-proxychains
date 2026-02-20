@@ -1,5 +1,4 @@
 ---
-
 - name: assert | Test if dynamic_chain is set correctly
   ansible.builtin.assert:
     that:
