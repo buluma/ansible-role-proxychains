@@ -12,47 +12,47 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-  - name: Converge
-    hosts: all
-    become: true
-    gather_facts: true
-    vars:
-      dynamic_chain: true
-      chain_len: 2
-      tcp_read_time_out: 16000
-      tcp_connect_time_out: 10000
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    dynamic_chain: true
+    chain_len: 2
+    tcp_read_time_out: 16000
+    tcp_connect_time_out: 10000
 
-    pre_tasks:
-      - name: Update apt cache.
-        apt: update_cache=yes cache_valid_time=600
-        when: ansible_os_family == 'Debian'
-        changed_when: false
-    tasks:
-      - name: "Include buluma.python_pip"
-        ansible.builtin.include_role:
-          name: "buluma.python_pip"
-      - name: "Include buluma.epel"
-        ansible.builtin.include_role:
-          name: "buluma.epel"
-      - name: "Include buluma.pip"
-        ansible.builtin.include_role:
-          name: "buluma.pip"
-      - name: "Include buluma.proxychains"
-        ansible.builtin.include_role:
-          name: "buluma.proxychains"
+  pre_tasks:
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=600
+    when: ansible_os_family == 'Debian'
+    changed_when: false
+  tasks:
+  - name: "Include buluma.python_pip"
+    ansible.builtin.include_role:
+      name: "buluma.python_pip"
+  - name: "Include buluma.epel"
+    ansible.builtin.include_role:
+      name: "buluma.epel"
+  - name: "Include buluma.pip"
+    ansible.builtin.include_role:
+      name: "buluma.pip"
+  - name: "Include buluma.proxychains"
+    ansible.builtin.include_role:
+      name: "buluma.proxychains"
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-proxychains/blob/master/molecule/default/prepare.yml):
 
 ```yaml
 ---
-  - name: Prepare
-    hosts: all
-    become: true
-    gather_facts: false
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: false
 
-    roles:
-      - role: buluma.bootstrap
+  roles:
+  - role: buluma.bootstrap
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
