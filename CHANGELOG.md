@@ -9,6 +9,10 @@
 - Update action [\#6](https://github.com/buluma/ansible-role-proxychains/issues/6)
 - rebuild action [\#5](https://github.com/buluma/ansible-role-proxychains/issues/5)
 
+**Merged pull requests:**
+
+- Bump docker/setup-buildx-action from 3 to 4 [\#25](https://github.com/buluma/ansible-role-proxychains/pull/25) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [24.3.31](https://github.com/buluma/ansible-role-proxychains/tree/24.3.31) (2024-03-31)
 
 [Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/0.4.0...24.3.31)
