@@ -4,5 +4,5 @@ roles:
   - name: buluma.python_pip
   - name: buluma.epel
   - name: buluma.pip
-collections:
+collections: []
   - name: community.general

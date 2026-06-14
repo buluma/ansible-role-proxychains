@@ -8,6 +8,7 @@
   tasks:
     - name: Check proxychains config.
       command: |
+      changed_when: false
         cat /etc/proxychains.conf
       register: proxychains_conf
 
@@ -16,6 +17,7 @@
 
     - name: Finding some webservers through proxy.
       command: |
+      changed_when: false
         proxychains nmap 127.0.0.1
       register: nmap_test
 
