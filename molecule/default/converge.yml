@@ -10,6 +10,19 @@
     tcp_connect_time_out: 10000
 
   pre_tasks:
+    - name: Find EXTERNALLY-MANAGED files
+      ansible.builtin.find:
+        paths: /usr/lib
+        patterns: "EXTERNALLY-MANAGED"
+        recurse: true
+      register: externally_managed_files
+
+    - name: Remove EXTERNALLY-MANAGED files
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ externally_managed_files.files }}"
+
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_facts['os_family'] == 'Debian'
