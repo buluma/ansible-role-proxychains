@@ -17,5 +17,5 @@
 
     - name: Check proxychains binary is present.
       ansible.builtin.command:
-        cmd: which proxychains
+        cmd: bash -c 'command -v proxychains || command -v proxychains4'
       changed_when: false
