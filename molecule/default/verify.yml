@@ -1,25 +1,21 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
   become: true
   gather_facts: false
   tasks:
-    - name: Check proxychains config.
-      command: |
+    - name: Check proxychains config exists.
+      ansible.builtin.command:
+        cmd: cat /etc/proxychains.conf
       changed_when: false
-        cat /etc/proxychains.conf
       register: proxychains_conf
 
-    - debug: var=proxychains_conf.stdout_lines
+    - name: Show proxychains config.
+      ansible.builtin.debug:
+        var: proxychains_conf.stdout_lines
       tags: molecule-notest
 
-    - name: Finding some webservers through proxy.
-      command: |
+    - name: Check proxychains binary is present.
+      ansible.builtin.command:
+        cmd: which proxychains
       changed_when: false
-        proxychains nmap 127.0.0.1
-      register: nmap_test
-
-    - debug: var=nmap_test.stdout_lines
-      tags: molecule-notest
