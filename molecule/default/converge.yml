@@ -10,45 +10,13 @@
     tcp_connect_time_out: 10000
 
   pre_tasks:
-    - name: Install python3 and sudo
-      ansible.builtin.raw: |
-        if command -v dnf 2>/dev/null; then
-          dnf install -y python3 sudo
-        elif command -v apt-get 2>/dev/null; then
-          apt-get update -qq && apt-get install -y python3 sudo
-        elif command -v apk 2>/dev/null; then
-          apk update && apk add python3 sudo
-        fi
-      become: false
-      changed_when: true
-
-    - name: Find EXTERNALLY-MANAGED files
-      ansible.builtin.find:
-        paths: /usr/lib
-        patterns: "EXTERNALLY-MANAGED"
-        recurse: true
-      register: externally_managed_files
-
-    - name: Remove EXTERNALLY-MANAGED files
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: absent
-      loop: "{{ externally_managed_files.files }}"
-
     - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
       when: ansible_facts['os_family'] == 'Debian'
       changed_when: false
-  tasks:
-    - name: "Include buluma.python_pip"
-      ansible.builtin.include_role:
-        name: "buluma.python_pip"
-    - name: "Include buluma.epel"
-      ansible.builtin.include_role:
-        name: "buluma.epel"
-    - name: "Include buluma.pip"
-      ansible.builtin.include_role:
-        name: "buluma.pip"
-    - name: "Include buluma.proxychains"
-      ansible.builtin.include_role:
-        name: "buluma.proxychains"
+
+  roles:
+    - role: buluma.epel
+    - role: buluma.proxychains
