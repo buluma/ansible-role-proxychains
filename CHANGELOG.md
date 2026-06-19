@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-proxychains/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/26.6.0...HEAD)
+
+**Closed issues:**
+
+- Add to tracker [\#1](https://github.com/buluma/ansible-role-proxychains/issues/1)
+
 ## [26.6.0](https://github.com/buluma/ansible-role-proxychains/tree/26.6.0) (2026-06-14)
 
 [Full Changelog](https://github.com/buluma/ansible-role-proxychains/compare/24.3.31...26.6.0)
